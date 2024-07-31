@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>Login</h1>
+  <form>
+    <label for="username">Username</label>
+    <input type="text" id="username"/>
+    <label for="password">Password</label>
+    <input type="password" id="password"/>
+    <input type="submit" value="Login">
+    <a [routerLink]="['/auth/register']" routerLinkActive="active" >Don't have an account?</a>
+  </form>
+</div>
