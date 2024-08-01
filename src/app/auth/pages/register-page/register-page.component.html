@@ -1,12 +1,14 @@
 <div class="container">
-  <h1>Register</h1>
-    <form>
-      <label for="username">Username</label>
-      <input type="text" id="username"/>
-      <label for="password">Password</label>
-      <input type="password" id="password"/>
-      <input type="submit" value="Register">
-      <a [routerLink]="['/auth/login']" routerLinkActive="active" >Already have an account?</a>
-    </form>
-  </div>
-  
+  <h1>Registration</h1>
+  <form (submit)="register($event)" [formGroup]="formGroup">
+    <label for="username">Username</label>
+    <input type="text" id="username" formControlName="username"/>
+    <label for="password">Password</label>
+    <input type="password" id="password" formControlName="password"/>
+    <div class="errors">
+      <span class="error" *ngFor="let error of (errors$ | async)">{{ error }}</span>
+    </div>
+    <input type="submit" value="Register">
+    <a [routerLink]="['/auth/login']" routerLinkActive="active" >Already have an account?</a>
+  </form>
+</div>

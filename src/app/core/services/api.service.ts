@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { LoginRequest } from '../models/login-request';
 import { JwtResponse } from '../models/jwt-response';
 import { ErrorResponse } from '../models/error-response';
+import { RegisterRequest } from '../models/register-request';
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +16,10 @@ export class ApiService {
   login(loginRequest: LoginRequest): Observable<HttpResponse<JwtResponse | ErrorResponse>> {
     return this.http.post<JwtResponse | ErrorResponse>(
       'auth/login', loginRequest, {observe: 'response'});
+  }
+
+  register(registerRequest: RegisterRequest): Observable<HttpResponse<JwtResponse | ErrorResponse>> {
+    return this.http.post<JwtResponse | ErrorResponse>(
+      'auth/register', registerRequest, {observe: 'response'});
   }
 }
