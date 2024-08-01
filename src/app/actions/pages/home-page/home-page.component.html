@@ -1,25 +1,44 @@
-<div class="wrapper" *ngIf="(userInfo$ | async) as userInfo">
-    <div class="header">
-        <p class="username">Hello {{ userInfo.username }}!</p>
-        <button class="logout">Logout</button>
+<div class="wrapper" *ngIf="userInfo$ | async as userInfo">
+  <div class="header">
+    <p class="username">Hello {{ userInfo.username }}!</p>
+    <button class="logout">Logout</button>
+  </div>
+  <div class="container">
+    <div class="user" *ngIf="!userInfo.isAdmin">
+      <div class="info">
+        <span>
+          Account status:
+          <span [className]="userInfo.account.isActive ? 'active' : 'inactive'">
+            {{ userInfo.account.isActive ? "Active" : "Inactive" }}
+          </span>
+        </span>
+        <span>
+          Account value: <span class="value">{{ userInfo.account.money }}</span
+          >$
+        </span>
+      </div>
+      <div class="controls">
+        <button
+          type="button"
+          class="deposit"
+          (click)="onControlClick('Deposit')"
+        >
+          Deposit
+        </button>
+        <button
+          type="button"
+          class="withdraw"
+          (click)="onControlClick('Withdraw')"
+        >
+          Withdraw
+        </button>
+      </div>
     </div>
-    <div class="container">
-        <div class="user" *ngIf="!userInfo.isAdmin"> 
-            <div class="info">
-                <span>
-                    Account status: 
-                    <span [className]="userInfo.account.isActive ? 'active' : 'inactive'">
-                        {{ userInfo.account.isActive ? 'Active' : 'Inactive'}}
-                    </span>
-                </span>
-                <span>
-                    Account value: <span class="value">{{ userInfo.account.money }}</span>$
-                </span>
-            </div>
-            <div class="controls">
-                <button type="button" class="deposit">Deposit</button>
-                <button type="button" class="withdraw">Withdraw</button>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>
+<app-popup
+  [isOpen]="isPopupOpen"
+  [label]="popupLabel"
+  (onCancel)="onPopupCancel()"
+  (onSubmit)="onPopupSubmit($event)"
+></app-popup>
