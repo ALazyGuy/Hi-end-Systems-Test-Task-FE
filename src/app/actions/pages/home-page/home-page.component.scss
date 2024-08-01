@@ -1,0 +1,109 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+
+    &>.header {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        padding: 30px 50px;
+
+        &>.username {
+            font-weight: 500;
+            font-size: 21px;
+            font-style: italic;
+        }
+
+        &>.logout {
+            font-weight: 500;
+            font-size: 21px;
+            border-radius: 10px;
+            padding: 10px;
+            border: none;
+            color: white;
+            box-sizing: border-box;
+            background-color: red;
+
+            &:hover {
+                cursor: pointer;
+                background-color: rgba(128, 0, 0, 0.884);
+            }
+        }
+    }
+
+    .container {
+        width: 100vw;
+        height: 100vh;
+        font-size: 25px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &>.user {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: fit-content;
+            border: 1px solid black;
+            border-radius: 10px;
+            padding: 20px;
+
+            &>.info {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+
+                & .active {
+                    color: green;
+                    font-weight: 800;
+                }
+
+                & .inactive {
+                    color: red;
+                    font-weight: 800;
+                }
+            }
+
+            &>.controls {
+                margin-top: 20px;
+                width: 100%;
+                display: flex;
+                gap: 10px;
+
+                &>button {
+                    flex: 1;
+                    font-weight: 500;
+                    font-size: 21px;
+                    border-radius: 10px;
+                    padding: 10px;
+                    border: none;
+                    color: white;
+                    box-sizing: border-box;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+
+                    &.deposit {
+                        background-color: green;
+
+                        &:hover {
+                            background-color: rgba(0, 128, 0, 0.884);
+                        }
+                    }
+
+                    &.withdraw {
+                        background-color: red;
+
+                        &:hover {
+                            background-color: rgba(128, 0, 0, 0.884);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
