@@ -6,6 +6,7 @@ import { JwtResponse } from '../models/jwt-response';
 import { ErrorResponse } from '../models/error-response';
 import { RegisterRequest } from '../models/register-request';
 import { UserInfo } from '../models/user-info';
+import { AccountAction } from '../models/account-action';
 
 @Injectable({
   providedIn: 'root'
@@ -27,4 +28,9 @@ export class ApiService {
   loadUserInfo(): Observable<UserInfo> {
     return this.http.get<UserInfo>('user/current');
   }
+
+  doAccountAction(body: AccountAction): Observable<HttpResponse<any>> {
+    return this.http.put(`user/${body.type}`, {amount: body.amount}, {observe: 'response'});
+  }
+
 }

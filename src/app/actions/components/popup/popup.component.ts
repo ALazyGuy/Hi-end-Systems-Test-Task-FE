@@ -13,6 +13,7 @@ export class PopupComponent implements OnInit{
 
   @Input() label: string = '';
   @Input() isOpen: boolean = false;
+  @Input() isError: boolean = false;
 
   @Output() onSubmit: EventEmitter<number> = new EventEmitter();
   @Output() onCancel: EventEmitter<null> = new EventEmitter();

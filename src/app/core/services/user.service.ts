@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { LoginRequest } from '../models/login-request';
-import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, switchMap } from 'rxjs';
 import { JwtResponse } from '../models/jwt-response';
 import { ErrorResponse } from '../models/error-response';
 import { RegisterRequest } from '../models/register-request';
 import { UserInfo } from '../models/user-info';
+import { HttpResponse } from '@angular/common/http';
+import { AccountActionType } from '../models/account-action';
 
 @Injectable({
   providedIn: 'root'
@@ -70,4 +72,16 @@ export class UserService {
   getUserInfo$(): BehaviorSubject<UserInfo | null> {
     return this.userInfo$;
   }
+
+  logout(): void {
+    localStorage.removeItem('token');
+    this.userInfo$.next(null);
+  }
+
+  doAccountAction(type: AccountActionType, amount: number): void {
+    this.apiService.doAccountAction({type: type, amount: amount}).pipe(
+      switchMap(() => this.loadUserInfo())
+    ).subscribe();
+  }
+
 }

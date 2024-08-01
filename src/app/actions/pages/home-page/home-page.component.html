@@ -1,7 +1,7 @@
 <div class="wrapper" *ngIf="userInfo$ | async as userInfo">
   <div class="header">
     <p class="username">Hello {{ userInfo.username }}!</p>
-    <button class="logout">Logout</button>
+    <button class="logout" (click)="logout()">Logout</button>
   </div>
   <div class="container">
     <div class="user" *ngIf="!userInfo.isAdmin">
@@ -19,6 +19,7 @@
       </div>
       <div class="controls">
         <button
+          [disabled]="!userInfo.account.isActive"
           type="button"
           class="deposit"
           (click)="onControlClick('Deposit')"
@@ -26,6 +27,7 @@
           Deposit
         </button>
         <button
+          [disabled]="!userInfo.account.isActive"
           type="button"
           class="withdraw"
           (click)="onControlClick('Withdraw')"
@@ -39,6 +41,7 @@
 <app-popup
   [isOpen]="isPopupOpen"
   [label]="popupLabel"
+  [isError]="popupError"
   (onCancel)="onPopupCancel()"
   (onSubmit)="onPopupSubmit($event)"
 ></app-popup>
