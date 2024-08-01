@@ -19,12 +19,24 @@
         font-size: 15px;
         font-weight: 500;
 
+        &>.errors {
+            color: red;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
         &>label:hover {
             cursor: pointer;
         }
 
         &>input {
             padding: 5px;
+            border-radius: 5px;
+
+            &.ng-invalid.ng-touched {
+                border-color: red;
+            }
 
             &:focus {
                 outline: none;

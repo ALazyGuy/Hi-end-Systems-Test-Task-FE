@@ -1,10 +1,13 @@
 <div class="container">
   <h1>Login</h1>
-  <form>
+  <form (submit)="login($event)" [formGroup]="formGroup">
     <label for="username">Username</label>
-    <input type="text" id="username"/>
+    <input type="text" id="username" formControlName="username"/>
     <label for="password">Password</label>
-    <input type="password" id="password"/>
+    <input type="password" id="password" formControlName="password"/>
+    <div class="errors">
+      <span class="error" *ngFor="let error of (errors$ | async)">{{ error }}</span>
+    </div>
     <input type="submit" value="Login">
     <a [routerLink]="['/auth/register']" routerLinkActive="active" >Don't have an account?</a>
   </form>
