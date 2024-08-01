@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { UserService } from '../../../core/services/user.service';
 import { AsyncPipe, NgFor } from '@angular/common';
 import { Subject } from 'rxjs';
@@ -17,7 +17,9 @@ export class LoginPageComponent implements OnInit{
   errors$: Subject<string[]> = new Subject();
   formGroup!: FormGroup;
 
-  constructor(private userService: UserService, private formBuilder: FormBuilder) {}
+  constructor(private userService: UserService, private formBuilder: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.formGroup = this.buildFormGroup();
@@ -35,6 +37,9 @@ export class LoginPageComponent implements OnInit{
     const test = this.formGroup.value;
     this.userService.loginUser(test).subscribe({next: errors => {
       this.errors$.next(errors);
+      if(errors.filter(a => a.length > 0).length === 0) {
+        this.router.navigateByUrl('/actions/home');
+      }
     }});
   }
 

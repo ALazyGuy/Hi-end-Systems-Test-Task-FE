@@ -1,0 +1,5 @@
+test
+
+<div *ngIf="(userInfo$ | async) as userInfo">
+    Hello {{ userInfo.username }}! You are {{ !userInfo.isAdmin && 'not' }} an admin!
+</div>

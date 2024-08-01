@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Subject } from 'rxjs';
 import { UserService } from '../../../core/services/user.service';
 import { AsyncPipe, NgFor } from '@angular/common';
@@ -16,7 +16,8 @@ export class RegisterPageComponent {
   errors$: Subject<string[]> = new Subject();
   formGroup!: FormGroup;
 
-  constructor(private userService: UserService, private formBuilder: FormBuilder) {}
+  constructor(private userService: UserService, private formBuilder: FormBuilder, 
+    private router: Router) {}
 
   ngOnInit(): void {
     this.formGroup = this.buildFormGroup();
@@ -34,6 +35,9 @@ export class RegisterPageComponent {
     const test = this.formGroup.value;
     this.userService.registerUser(test).subscribe({next: errors => {
       this.errors$.next(errors);
+      if(errors.filter(a => a.length > 0).length === 0) {
+        this.router.navigateByUrl('/actions/home');
+      }
     }});
   }
 
