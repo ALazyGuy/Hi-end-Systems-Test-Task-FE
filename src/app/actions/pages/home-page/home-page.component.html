@@ -36,6 +36,23 @@
         </button>
       </div>
     </div>
+    <div class="admin" *ngIf="userInfo.isAdmin">
+      <div class="accounts" *ngIf="allUsersInfo$ | async as users">
+        <div class="single" *ngFor="let user of users">
+          <span class="username">{{ user.username }}</span>
+          <span class="money">{{ user.account.money }}$</span>
+          <span [className]="user.account.isActive ? 'active' : 'inactive'">
+            {{ user.account.isActive ? "Active" : "Inactive" }}</span
+          >
+          <button
+            [className]="!user.account.isActive ? 'active' : 'inactive'"
+            (click)="changeAccountStatus(user.username, !user.account.isActive)"
+          >
+            {{ !user.account.isActive ? "Activate" : "Deactive" }}
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <app-popup

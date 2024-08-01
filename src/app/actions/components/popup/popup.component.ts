@@ -51,6 +51,7 @@ export class PopupComponent implements OnInit{
   cancel(): void {
     this.formGroup.markAsUntouched();
     this.onCancel.emit(null);
+    this.formGroup.controls['value'].setValue('');
   }
 
 }

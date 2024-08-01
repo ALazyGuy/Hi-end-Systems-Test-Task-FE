@@ -8,6 +8,7 @@ import { RegisterRequest } from '../models/register-request';
 import { UserInfo } from '../models/user-info';
 import { HttpResponse } from '@angular/common/http';
 import { AccountActionType } from '../models/account-action';
+import { ChangeStatusRequest } from '../models/change-status-request';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,8 @@ export class UserService {
 
   private userInfo$: BehaviorSubject<UserInfo | null> 
     = new BehaviorSubject<UserInfo | null>(null);
+  private allUsersInfo$: BehaviorSubject<UserInfo[]>
+    = new BehaviorSubject([] as UserInfo[]);
 
   constructor(private apiService: ApiService) { }
 
@@ -82,6 +85,22 @@ export class UserService {
     this.apiService.doAccountAction({type: type, amount: amount}).pipe(
       switchMap(() => this.loadUserInfo())
     ).subscribe();
+  }
+
+  loadAllUsersInfo(): void {
+    this.apiService.getAllUsersInfo().subscribe({
+      next: value => this.allUsersInfo$.next(value)
+    });
+  }
+
+  getAllUsersInfo$(): BehaviorSubject<UserInfo[]> {
+    return this.allUsersInfo$;
+  }
+
+  changeAccountStatus(body: ChangeStatusRequest) {
+    this.apiService.changeAccountStatus(body).subscribe({
+      next: () => this.loadAllUsersInfo()
+    });
   }
 
 }

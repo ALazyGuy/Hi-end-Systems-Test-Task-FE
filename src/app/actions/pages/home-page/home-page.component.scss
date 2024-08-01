@@ -105,5 +105,74 @@
                 }
             }
         }
+
+        &>.admin {
+            width: 100vw;
+            height: 100vh;
+            padding: 20px;
+
+            &>.accounts {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                font-size: 25px;
+
+                &>.single {
+                    border: 1px solid black;
+                    display: flex;
+                    
+                    &>* {
+                        flex: 1;
+                        padding: 20px;
+                        border-right: 1px solid black;
+                    }
+
+                    &>.active {
+                        color: green;
+                    }
+
+                    &>.inactive {
+                        color: red;
+                    }
+
+                    &>button {
+                        padding: 10px;
+                        border-radius: 10px;
+                        box-shadow: none;
+                        margin: 10px;
+                        font-size: 25px;
+                        color: white !important;
+                        border: 1px solid black;
+
+                        &.active {
+                            background-color: green;
+                            border-color: green;
+
+                            &:hover {
+                                color: green !important;
+                                background-color: white;
+                                border: 1px solid green;
+                            }
+                        }
+
+                        &.inactive {
+                            background-color: red;
+                            border-color: red;
+
+                            &:hover {
+                                color: red !important;
+                                background-color: white;
+                                border: 1px solid red;
+                            }
+                        }
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
